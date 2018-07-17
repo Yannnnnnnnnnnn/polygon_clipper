@@ -12,13 +12,31 @@
 
 #include "clipper.h"
 #include "clipper_offset.h"
+#include "svg.h"
 
 using namespace std;
 using namespace clipperlib;
+using namespace svglib;
 
+void SaveToSVG(const string filename, int max_width, int max_height, 
+  Paths &subj, Paths &clip, Paths &solution,
+  FillRule fill_rule, bool show_coords = false)
+{
+  SVGBuilder svg;
+  svg.fill_rule = fill_rule;
+  svg.SetCoordsStyle("Verdana", 0xFF0000AA, 9);
+  svg.AddPaths(subj, false, 0x1200009C, 0xCCD3D3DA, 0.8, show_coords);
+  svg.AddPaths(clip, false, 0x129C0000, 0xCCFFA07A, 0.8, show_coords);
+  svg.AddPaths(solution, false, 0x6080ff9C, 0xFF003300, 0.8, show_coords);
+  svg.SaveToFile(filename, max_width, max_height, 80);
+}
 
 int main(int argc, char* argv[])
 {
+  int display_width = 800, display_height = 600;
+  bool show_cords = false;//true;//  //don't this if there are hundreds or thousands of coords :)
+
+
   Paths subject, clip, solution;
   
   ClipType ct = ctIntersection;
@@ -27,7 +45,7 @@ int main(int argc, char* argv[])
   time_t time_start = clock();
   /************************************************************************/
   int edge_cnt = 4;
-  ct = ctIntersection;//ctUnion;//
+  ct = ctDifference;
   fr = frEvenOdd;//frNonZero;//
   /************************************************************************/
   subject.resize(1);
@@ -62,6 +80,11 @@ int main(int argc, char* argv[])
     }
   }
 
+  Paths subject_open,solution_open;
+  SaveToSVG("difference.svg", display_width, display_height,
+          subject, clip, solution, 
+          fr, show_cords);
+  system("difference.svg");
 
   double time_elapsed = ((double)clock() - time_start) * 1000 / CLOCKS_PER_SEC;
   cout << "\nFinished in " << time_elapsed << " msecs.\n\n";

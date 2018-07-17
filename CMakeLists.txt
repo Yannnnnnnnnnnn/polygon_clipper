@@ -10,7 +10,9 @@ set(CMAKE_BUILD_TYPE "release")
 set(SOURCE_DIR ${PROJECT_SOURCE_DIR}/src)
 
 # LIBRARY
-add_library(libclipper ${SOURCE_DIR}/clipper.h 
+add_library(libclipper ${SOURCE_DIR}/svg.h
+                       ${SOURCE_DIR}/svg.cpp
+                       ${SOURCE_DIR}/clipper.h 
                        ${SOURCE_DIR}/clipper.cpp
                        ${SOURCE_DIR}/clipper_offset.h
                        ${SOURCE_DIR}/clipper_offset.cpp
@@ -19,5 +21,17 @@ add_library(libclipper ${SOURCE_DIR}/clipper.h
 
 # DEMO
 include_directories(${SOURCE_DIR})
-add_executable(clipper ${PROJECT_SOURCE_DIR}/demo/main.cpp)
-target_link_libraries(clipper libclipper)
+add_executable(clipper_intersection ${PROJECT_SOURCE_DIR}/demo/main_intersection.cpp)
+target_link_libraries(clipper_intersection libclipper)
+
+include_directories(${SOURCE_DIR})
+add_executable(clipper_union ${PROJECT_SOURCE_DIR}/demo/main_union.cpp)
+target_link_libraries(clipper_union libclipper)
+
+include_directories(${SOURCE_DIR})
+add_executable(clipper_difference ${PROJECT_SOURCE_DIR}/demo/main_difference.cpp)
+target_link_libraries(clipper_difference libclipper)
+
+include_directories(${SOURCE_DIR})
+add_executable(clipper_xor ${PROJECT_SOURCE_DIR}/demo/main_xor.cpp)
+target_link_libraries(clipper_xor libclipper)
