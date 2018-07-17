@@ -1,9 +1,20 @@
 # polygon_clipper
 
+Polygon_Clipper is origin from Angus Johnson's clipper, I just make it available bu CMake.
 
-# TODO
-1.  Add show result
-2.  Add more demo
+#Demo
+
+intersection
+![](https://github.com/Yannnnnnnnnnnn/polygon_clipper/blob/master/intersection.svg)
+
+union
+![](https://github.com/Yannnnnnnnnnnn/polygon_clipper/blob/master/union.svg)
+
+difference
+![](https://github.com/Yannnnnnnnnnnn/polygon_clipper/blob/master/difference.svg)
+
+xor
+![](https://github.com/Yannnnnnnnnnnn/polygon_clipper/blob/master/xor.svg)
 
 # LICENSE
 * Author    :  Angus Johnson                                                   
