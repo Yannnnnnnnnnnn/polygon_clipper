@@ -2,6 +2,9 @@
 
 Polygon_Clipper is origin from Angus Johnson's clipper, I just make it available bu CMake.
 
+# WATCH!!!
+ONLY WORK FOR INT
+
 #Demo
 
 intersection
